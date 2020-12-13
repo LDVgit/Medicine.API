@@ -12,6 +12,7 @@ namespace Medicine.API.Models
         public string SecondName { get; set; }
         public string? Patronymic { get; set; }
         public DateTime DayOfBirth { get; set; }
+        public IEnumerable<Doctor> Doctors { get; set; }
 
     }
 }

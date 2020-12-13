@@ -11,5 +11,6 @@ namespace Medicine.API.Models
         public Employee Employeer { get; set; }
         public Doctor Physician { get; set; }
         public string Qualification { get; set; }
+
     }
 }

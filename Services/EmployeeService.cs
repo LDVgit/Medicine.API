@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Medicine.API.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Medicine.API.Services
 {
-    public class EmployeeService
+    public class EmployeeService : IEmployee
     {
         private readonly ApiContext _ctx;
 
@@ -14,7 +15,59 @@ namespace Medicine.API.Services
         {
             _ctx = ctx;
         }
+        public IEnumerable<Employee> GetAll()
+        {
+            return _ctx.Employees.Include(e => e.Doctors);               
+        }
+        public Employee GetEmployeeById(int id)
+        {
+            return GetAll().ToList().Find(i => i.Id == id);
+        }
 
+        public void CreateEmployee(Employee employee)
+        {
+            _ctx.Employees.Add(employee);
+        }
 
+        public bool ExistsEmployee(int id)
+        {
+            if (!_ctx.Employees.Any(i => i.Id == id))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public void RemoveEmployee(int id)
+        {
+            if (ExistsEmployee(id))
+            {
+                var employee = GetEmployeeById(id);
+
+                _ctx.Employees.Remove(employee);
+                _ctx.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Couldn't find employee!");
+            }
+
+        }
+
+        public void UpdateEmployee(Employee employee)
+        {
+            if (ExistsEmployee(employee.Id))
+            {
+                var person = GetEmployeeById(employee.Id);
+                //_ctx.Employees.Attach(employee);
+                _ctx.Employees.Update(employee);
+                _ctx.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Couldn't remove employee!");
+            }
+
+        }
     }
 }
