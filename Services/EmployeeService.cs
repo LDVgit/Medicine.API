@@ -61,8 +61,8 @@ namespace Medicine.API.Services
         {
             if (ExistsEmployee(employee.Id))
             {
-                var person = GetEmployeeById(employee.Id);
-                //_ctx.Employees.Attach(employee);
+               //var person = GetEmployeeById(employee.Id);
+               // _ctx.Employees.Attach(person);
                 _ctx.Employees.Update(employee);
                 _ctx.SaveChanges();
             }

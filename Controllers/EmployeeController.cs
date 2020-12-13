@@ -18,18 +18,37 @@ namespace Medicine.API.Controllers
             _src = src;
         }
 
-        [HttpGet("GetEmployeers")]
-        public ActionResult GetEmployeers()
+        [HttpGet("GetEmployees")]
+        public ActionResult Get()
         {
             return Ok(_src.GetAll());
         }
 
+        [HttpGet("GetEmployeeById/{id}")]
+        public ActionResult GetById(int id)
+        {
+            return Ok(_src.GetEmployeeById(id));
+        }
+
         [HttpPost]
-        public ActionResult Post(Employee employee)
+        public ActionResult Post([FromBody] Employee employee)
         {
             _src.CreateEmployee(employee);
             return Ok(employee);
         }
 
+        [HttpDelete("RemoveEmployee/{id}")]
+        public ActionResult RemoveEmployee(int id)
+        {
+            _src.RemoveEmployee(id);
+            return Ok();
+        }
+
+        [HttpPut("UpdateEmployee")]
+        public ActionResult UpdateEmployee([FromBody] Employee employee)
+        {
+            _src.UpdateEmployee(employee);
+            return Ok(employee);
+        }
     }
 }
