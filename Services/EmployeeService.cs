@@ -27,6 +27,9 @@ namespace Medicine.API.Services
         public void CreateEmployee(Employee employee)
         {
             _ctx.Employees.Add(employee);
+            _ctx.SaveChanges();
+            if (!ExistsEmployee(employee.Id))
+                throw new Exception("Employee is not created");
         }
 
         public bool ExistsEmployee(int id)

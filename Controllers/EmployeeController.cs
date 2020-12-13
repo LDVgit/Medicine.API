@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Medicine.API.Services;
+using Medicine.API.Models;
 
 namespace Medicine.API.Controllers
 {
@@ -11,10 +12,24 @@ namespace Medicine.API.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-        private readonly EmployeeService _src;
-        public EmployeeController(EmployeeService src)
+        private readonly IEmployee _src;
+        public EmployeeController(IEmployee src)
         {
             _src = src;
         }
+
+        [HttpGet("GetEmployeers")]
+        public ActionResult GetEmployeers()
+        {
+            return Ok(_src.GetAll());
+        }
+
+        [HttpPost]
+        public ActionResult Post(Employee employee)
+        {
+            _src.CreateEmployee(employee);
+            return Ok(employee);
+        }
+
     }
 }

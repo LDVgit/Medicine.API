@@ -6,7 +6,7 @@ using Medicine.API.Models;
 
 namespace Medicine.API.Services
 {
-    interface IEmployee
+    public interface IEmployee
     {
         IEnumerable<Employee> GetAll();
         Employee GetEmployeeById(int id);
