@@ -18,7 +18,7 @@ namespace Medicine.API.Controllers
             _src = src;
         }
 
-        [HttpGet("GetEmployeers")]
+        [HttpGet("GetEmployees")]
         public ActionResult GetEmployeers()
         {
             return Ok(_src.GetAll());
