@@ -43,6 +43,7 @@ namespace Medicine.API
                 opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IEmployee,EmployeeService>();
+            services.AddScoped<ISpecialty,SpecialtyService>();
 
             services.AddSwaggerGen(c =>
             {
