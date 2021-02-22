@@ -61,12 +61,14 @@ namespace Medicine.API
                 //app.UseSwagger();
                 //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Medicine.API v1"));
             }
+            // add server name for sql manager in settingjson.
+            // (localdb)\MSSQLLocalDB
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
             app.UseRouting();
 
-           // app.UseAuthorization();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
