@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,23 +19,23 @@ namespace Medicine.API.Controllers
         }
 
         [HttpGet("GetEmployees")]
-        public ActionResult Get()
+        public ActionResult GetEmployeers()
         {
             return Ok(_src.GetAll());
         }
-
-        [HttpGet("GetEmployeeById/{id}")]
-        public ActionResult GetById(int id)
-        {
-            return Ok(_src.GetEmployeeById(id));
-        }
-
+        /// <summary>
+        /// Создание работника
+        /// </summary>
+        /// <param name="employee"> Работник </param>
+        /// <returns></returns>
         [HttpPost]
-        public ActionResult Post([FromBody] Employee employee)
+        public ActionResult Post(Employee employee)
         {
+            _src.ActionEmployee += GetFirstName; //Пример использования события
             _src.CreateEmployee(employee);
             return Ok(employee);
         }
+
 
         [HttpDelete("RemoveEmployee/{id}")]
         public ActionResult RemoveEmployee(int id)
@@ -49,6 +49,14 @@ namespace Medicine.API.Controllers
         {
             _src.UpdateEmployee(employee);
             return Ok(employee);
+        }
+        /// <summary>
+        /// Обработчик события
+        /// </summary>
+        /// <param name="message"> Сообщение в консоль </param>
+        private void GetFirstName(string message)
+        {
+            Console.WriteLine(message);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Medicine.API.Models
     {
         public int Id { get; set; }
         public Employee Employeer { get; set; }
-        public Doctor Physician { get; set; }
+        public Specialty Physician { get; set; }
         public string Qualification { get; set; }
 
     }

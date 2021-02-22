@@ -9,5 +9,6 @@ namespace Medicine.API.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public IEnumerable<Doctor> Doctors { get; set; }
     }
 }

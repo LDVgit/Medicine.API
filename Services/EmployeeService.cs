@@ -11,6 +11,8 @@ namespace Medicine.API.Services
     {
         private readonly ApiContext _ctx;
 
+        public event IEmployee.EmployeeHandler ActionEmployee;
+
         public EmployeeService(ApiContext ctx)
         {
             _ctx = ctx;
@@ -28,6 +30,7 @@ namespace Medicine.API.Services
         {
             _ctx.Employees.Add(employee);
             _ctx.SaveChanges();
+            ActionEmployee.Invoke($"Created ${employee.FirstName}");
             if (!ExistsEmployee(employee.Id))
                 throw new Exception("Employee is not created");
         }

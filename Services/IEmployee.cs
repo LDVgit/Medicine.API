@@ -8,6 +8,8 @@ namespace Medicine.API.Services
 {
     public interface IEmployee
     {
+        delegate void EmployeeHandler(string message);
+        event EmployeeHandler ActionEmployee;
         IEnumerable<Employee> GetAll();
         Employee GetEmployeeById(int id);
         void CreateEmployee(Employee employee);
